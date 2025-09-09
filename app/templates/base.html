@@ -13,21 +13,27 @@
     <main class="main-content">
       <div class="container">
         <!-- Flash сообщения -->
-        {% with messages = get_flashed_messages(with_categories=true) %} {% if
-        messages %} {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %} {% endif %} {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        <!--  -->
+        {% if messages %}
+        <!--  -->
+        {% for category, message in messages %}
+        <div class="flash-modal-overlay">
+          <div class="flash-modal flash-{{ category }}">
+            <p>{{ message }}</p>
+            <button class="flash-close-btn">Ок</button>
+          </div>
+        </div>
+        {% endfor %}
+        <!--  -->
+        {% endif %}
+        <!--  -->
+        {% endwith %}
 
         <!-- Контент страницы -->
         {% block content %}{% endblock %}
       </div>
     </main>
-
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2024 My Flask App. Все права защищены.</p>
-      </div>
-    </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>

@@ -1,7 +1,9 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 from app.config import Config
 from sqlalchemy import inspect
 
@@ -9,6 +11,7 @@ from sqlalchemy import inspect
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -18,6 +21,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    csrf.init_app(app)  # Инициализация CSRF защиты
     
     # Импорт моделей после инициализации db
     from app import models
@@ -42,10 +46,7 @@ def create_app(config_class=Config):
     
     # Автоматическое создание таблиц при запуске приложения
     with app.app_context():
-        # Проверяем, существует ли уже база данных
         inspector = inspect(db.engine)
-        
-        # Проверяем существование таблиц
         tables_exist = inspector.has_table('user')
         
         if not tables_exist:
@@ -53,5 +54,13 @@ def create_app(config_class=Config):
             print("✅ База данных создана!")
         else:
             print("✅ База данных уже существует")
+    
+    # === Проверка папок для пользователей ===
+    usersdata_path = os.path.join(app.static_folder, "usersdata")
+    avatars_path = os.path.join(usersdata_path, "avatars")
+
+    os.makedirs(avatars_path, exist_ok=True)  # создаст обе папки, если их нет
+
+    print(f"📂 Папка для аватарок готова: {avatars_path}")
     
     return app

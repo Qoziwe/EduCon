@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+<!--  -->
+{% block title %}Профиль{% endblock %}
+<!--  -->
+{% block content %}
+<!--  -->
+{% include "components/navbar.html" %}
+
+<div class="page-header">
+  <h1>Профиль пользователя</h1>
+  <p>Управление вашей учетной записью</p>
+</div>
+
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="user-avatar">
+        <img
+          src="{{ current_user.get_avatar_url() }}"
+          alt="Аватар"
+          class="avatar-img-large"
+        />
+        <div class="avatar-overlay">
+          <label for="avatar-upload" class="avatar-upload-btn">
+            <span>✏️</span>
+          </label>
+        </div>
+      </div>
+      <h2>{{ current_user.username }}</h2>
+      <p class="user-email">{{ current_user.email }}</p>
+      <p class="user-joined">
+        Присоединился: {{ current_user.created_at.strftime('%d.%m.%Y') if
+        current_user.created_at else 'Недавно' }}
+      </p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+      <input
+        type="file"
+        id="avatar-upload"
+        name="avatar"
+        accept="image/*"
+        style="display: none"
+      />
+
+      <div class="form-group">
+        <label for="username">Имя пользователя</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-input"
+          value="{{ current_user.username }}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-input"
+          value="{{ current_user.email }}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="bio">О себе</label>
+        <textarea
+          id="bio"
+          name="bio"
+          class="form-textarea"
+          placeholder="Расскажите о себе..."
+        >
+{{ current_user.bio }}</textarea
+        >
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          Сохранить изменения
+        </button>
+        <a href="{{ url_for('main.logout') }}" class="btn btn-secondary"
+          >Выйти</a
+        >
+        <a href="{{ url_for('main.index') }}" class="btn btn-secondary"
+          >На главную</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

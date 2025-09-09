@@ -1,10 +1,18 @@
-{% extends "base.html" %} {% block title %}Вход в систему{% endblock %} {% block
-content %}
+{% extends "base.html" %}
+<!--  -->
+{% block title %}Вход в систему{% endblock %}
+<!--  -->
+{% block content %}
+<!--  -->
+{% include "components/navbar.html" %}
+
 <div class="auth-container">
   <div class="auth-card">
     <h2>Вход в систему</h2>
 
     <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
       <div class="form-group">
         <label for="username">Имя пользователя:</label>
         <input

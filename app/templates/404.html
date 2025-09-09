@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+    <style>
+      /* Основной стиль */
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+        color: #fff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        animation: fadeIn 1.2s ease-out;
+      }
+
+      h1 {
+        font-size: 8rem;
+        margin: 0;
+        background: linear-gradient(90deg, #ff6ec4, #7873f5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: pulse 2s infinite alternate;
+      }
+
+      h2 {
+        margin: 0.5em 0;
+        font-size: 1.5rem;
+        color: #ddd;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 1.5em;
+        padding: 0.8em 1.5em;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(90deg, #ff6ec4, #7873f5);
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 15px rgba(255, 110, 196, 0.6);
+      }
+
+      /* Фоновые анимации */
+      .circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .circles li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        animation: float 25s linear infinite;
+        bottom: -150px;
+        border-radius: 50%;
+      }
+
+      .circles li:nth-child(1) {
+        left: 25%;
+        width: 80px;
+        height: 80px;
+        animation-duration: 22s;
+      }
+      .circles li:nth-child(2) {
+        left: 10%;
+        width: 20px;
+        height: 20px;
+        animation-duration: 12s;
+      }
+      .circles li:nth-child(3) {
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        animation-duration: 17s;
+      }
+      .circles li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-duration: 25s;
+      }
+      .circles li:nth-child(5) {
+        left: 65%;
+        width: 20px;
+        height: 20px;
+        animation-duration: 15s;
+      }
+      .circles li:nth-child(6) {
+        left: 75%;
+        width: 110px;
+        height: 110px;
+        animation-duration: 30s;
+      }
+      .circles li:nth-child(7) {
+        left: 35%;
+        width: 150px;
+        height: 150px;
+        animation-duration: 40s;
+      }
+      .circles li:nth-child(8) {
+        left: 50%;
+        width: 25px;
+        height: 25px;
+        animation-duration: 18s;
+      }
+      .circles li:nth-child(9) {
+        left: 20%;
+        width: 15px;
+        height: 15px;
+        animation-duration: 12s;
+      }
+      .circles li:nth-child(10) {
+        left: 85%;
+        width: 150px;
+        height: 150px;
+        animation-duration: 45s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-1000px) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        from {
+          text-shadow: 0 0 10px rgba(255, 110, 196, 0.4);
+        }
+        to {
+          text-shadow: 0 0 25px rgba(120, 115, 245, 0.8);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="container">
+      <h1>404</h1>
+      <h2>Оой, извините страница не найдена или была удалена</h2>
+      <a href="/" class="btn">Go Home</a>
+    </div>
+  </body>
+</html>

@@ -3,6 +3,9 @@
 {% block title %}Регистрация{% endblock %}
 <!--  -->
 {% block content %}
+<!--  -->
+{% include "components/navbar.html" %}
+
 <div class="auth-container">
   <div class="auth-card">
     <h2>Регистрация</h2>
@@ -12,6 +15,8 @@
       action="{{ url_for('auth.register') }}"
       class="auth-form"
     >
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
       <div class="form-group">
         <label for="username">Имя пользователя:</label>
         <input

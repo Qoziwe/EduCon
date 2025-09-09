@@ -3,32 +3,27 @@
 {% block title %}Main Page{% endblock %}
 <!--  -->
 {% block content %}
+<!--  -->
+{% include "components/navbar.html" %}
 
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="/" class="nav-logo">MyApp</a>
-    <div class="nav-menu">
-      <a href="{{ url_for('main.index') }}" class="nav-link">Главная</a>
-      <a href="{{ url_for('main.about') }}" class="nav-link">О нас</a>
-      {% if current_user.is_authenticated %}
-      <a href="#" class="nav-link">Профиль</a>
-      <a href="{{ url_for('auth.logout') }}" class="nav-link">Выйти</a>
-      {% else %}
-      <a href="{{ url_for('auth.login') }}" class="nav-link">Войти</a>
-      <a href="{{ url_for('auth.register') }}" class="nav-link">Регистрация</a>
-      {% endif %}
-    </div>
-  </div>
-</nav>
 
 <div class="hero-section">
-  <h1>Добро пожаловать в MyApp!</h1>
+  <h1>Добро пожаловать в EduConnect!</h1>
   <p>Это главная страница вашего Flask приложения.</p>
 
   {% if current_user.is_authenticated %}
   <div class="welcome-message">
+    <div class="user-avatar-profile">
+      <img
+        src="{{ current_user.get_avatar_url() }}"
+        alt="Аватар"
+        class="avatar-img"
+      />
+    </div>
     <p>Привет, {{ current_user.username }}! Рады снова видеть вас.</p>
-    <a href="#" class="btn btn-primary">Начать работу</a>
+    <a href="{{ url_for('main.profile') }}" class="btn btn-primary"
+      >Мой профиль</a
+    >
   </div>
   {% else %}
   <div class="auth-promo">
